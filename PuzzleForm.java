@@ -15,7 +15,7 @@ public class PuzzleForm {
         UN,DEUX,TROIS,QUATRE,CINQ,SIX,SEPT;
     }
     Rectangle a , b , c , d ;
-    String name ;
+    static String name ;
     Color color;
 
     private static int XMAX = Level.Xmax;
@@ -84,82 +84,95 @@ public class PuzzleForm {
     /**
      * Methode qui genere une forme de puzzle
      */
-    public static PuzzleForm makeRect() {
-        String name;
-        Random random = new Random();
-        FormeName block = FormeName.values()[random.nextInt(FormeName.values().length)];
+
+
+    protected static PuzzleForm makeL(){
         Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
                 d = new Rectangle(SIZE-1, SIZE-1);
-         switch (block) {
-             case UN :
-            a.setX(XMAX / 2 - SIZE);
-            b.setX(XMAX / 2 - SIZE);
-            b.setY(SIZE);
-            c.setX(XMAX / 2);
-            c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE);
-            d.setY(SIZE);
-            name = "j";
-            //L normal
-            break;
-             case DEUX:
-            a.setX(XMAX / 2 + SIZE);
-            b.setX(XMAX / 2 - SIZE);
-            b.setY(SIZE);
-            c.setX(XMAX / 2);
-            c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE);
-            d.setY(SIZE);
-            name = "l";
-            //L ma9louba
-            break;
-             case TROIS:
-            a.setX(XMAX / 2 - SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2 - SIZE);
-            c.setY(SIZE);
-            d.setX(XMAX / 2);
-            d.setY(SIZE);
-            name = "o";
-            //carre
-            break;
-             case QUATRE:
-            a.setX(XMAX / 2 + SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2);
-            c.setY(SIZE);
-            d.setX(XMAX / 2 - SIZE);
-            d.setY(SIZE);
-            name = "s";
-            //z ma9louba
-            break;
-             case CINQ:
-            a.setX(XMAX / 2 - SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2);
-            c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE);
-            name = "t";
-            //T ma9louba
-            break;
-             case SIX:
-            a.setX(XMAX / 2 + SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2 + SIZE);
-            c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE + SIZE);
-            d.setY(SIZE);
-            name = "z";
-            //z normal
-            break;
-             default:
-            /*a.setX(XMAX / 2 - SIZE - SIZE);
-            b.setX(XMAX / 2 - SIZE);
-            c.setX(XMAX / 2);
-            d.setX(XMAX / 2 + SIZE);*/
-            name = "i";
-            break;
-        }
+        a.setX(XMAX / 2 - SIZE);
+        b.setX(XMAX / 2 - SIZE);
+        b.setY(SIZE);
+        c.setX(XMAX / 2);
+        c.setY(SIZE);
+        d.setX(XMAX / 2 + SIZE);
+        d.setY(SIZE);
+        name = "j";
+        //L normal
+        return new PuzzleForm(a, b, c, d, name);
+    }
+    protected static PuzzleForm makeLI(){
+        Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
+                d = new Rectangle(SIZE-1, SIZE-1);
+        a.setX(XMAX / 2 + SIZE);
+        b.setX(XMAX / 2 - SIZE);
+        b.setY(SIZE);
+        c.setX(XMAX / 2);
+        c.setY(SIZE);
+        d.setX(XMAX / 2 + SIZE);
+        d.setY(SIZE);
+        name = "l";
+        //L ma9louba
+        return new PuzzleForm(a, b, c, d, name);
+    }
+    protected static PuzzleForm makeC(){
+        Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
+                d = new Rectangle(SIZE-1, SIZE-1);
+        a.setX(XMAX / 2 - SIZE);
+        b.setX(XMAX / 2);
+        c.setX(XMAX / 2 - SIZE);
+        c.setY(SIZE);
+        d.setX(XMAX / 2);
+        d.setY(SIZE);
+        name = "o";
+        //carre
+        return new PuzzleForm(a, b, c, d, name);
+    }
+    protected static PuzzleForm makeZI(){
+        Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
+                d = new Rectangle(SIZE-1, SIZE-1);
+        a.setX(XMAX / 2 + SIZE);
+        b.setX(XMAX / 2);
+        c.setX(XMAX / 2);
+        c.setY(SIZE);
+        d.setX(XMAX / 2 - SIZE);
+        d.setY(SIZE);
+        name = "s";
+        //z ma9louba
+        return new PuzzleForm(a, b, c, d, name);
+    }
+    protected static PuzzleForm makeTI(){
+        Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
+                d = new Rectangle(SIZE-1, SIZE-1);
+        a.setX(XMAX / 2 - SIZE);
+        b.setX(XMAX / 2);
+        c.setX(XMAX / 2);
+        c.setY(SIZE);
+        d.setX(XMAX / 2 + SIZE);
+        name = "t";
+        //T ma9louba
+        return new PuzzleForm(a, b, c, d, name);
+    }
+    protected static PuzzleForm makeZ(){
+        Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
+                d = new Rectangle(SIZE-1, SIZE-1);
+        a.setX(XMAX / 2 + SIZE);
+        b.setX(XMAX / 2);
+        c.setX(XMAX / 2 + SIZE);
+        c.setY(SIZE);
+        d.setX(XMAX / 2 + SIZE + SIZE);
+        d.setY(SIZE);
+        name = "z";
+        //z normal
+        return new PuzzleForm(a, b, c, d, name);
+    }
+    protected static PuzzleForm makeD(){
+        Rectangle a = new Rectangle(SIZE-1, SIZE-1), b = new Rectangle(SIZE-1, SIZE-1), c = new Rectangle(SIZE-1, SIZE-1),
+                d = new Rectangle(SIZE-1, SIZE-1);
+        a.setX(XMAX / 2 - SIZE - SIZE);
+        b.setX(XMAX / 2 - SIZE);
+        c.setX(XMAX / 2);
+        d.setX(XMAX / 2 + SIZE);
+        name = "i";
         return new PuzzleForm(a, b, c, d, name);
     }
 

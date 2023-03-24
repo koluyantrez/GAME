@@ -3,9 +3,10 @@ package oussama.hakik.game;
 import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
-import java.util.Random;
+import java.util.Map;
 
 public class PuzzleControlle{
     private static int XMAX = Level.Xmax;
@@ -32,13 +33,17 @@ public class PuzzleControlle{
                 groupe.setLayoutY(initY+deltaY);
             });
         });
+        double cordX = gridPane.getLayoutX();
+        double cordY = gridPane.getLayoutY();
+
 
         groupe.setOnMouseReleased(event -> {
             double mouseX = event.getSceneX()-100;
             double mouseY = event.getSceneY()-100;
             int colIndex = (int) (mouseX/30);
             int rowIndex = (int) (mouseY/30);
-            switch (objPuzzle.name){
+            if(groupe.getLayoutX()<=cordX && groupe.getLayoutY()<=cordY){
+                switch (objPuzzle.name){
                 case "j":
                     if(occuipedCells[rowIndex][colIndex]!=true){
                     gridPane.add(groupe.getChildren().get(0),colIndex,rowIndex);
@@ -64,7 +69,7 @@ public class PuzzleControlle{
                     gridPane.add(groupe.getChildren().get(0),colIndex,rowIndex+1);
                     gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex+1);
                     System.out.println("form o");
-                    occuipedCells[rowIndex][colIndex] = true;
+                        occuipedCells[rowIndex][colIndex] = true;
                     break;}
                 case "s":
                     if(occuipedCells[rowIndex][colIndex]!=true){
@@ -73,7 +78,7 @@ public class PuzzleControlle{
                     gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex-1+1);
                     gridPane.add(groupe.getChildren().get(0),colIndex+2,rowIndex-1+1);
                     System.out.println("form s");
-                    occuipedCells[rowIndex][colIndex] = true;
+                        occuipedCells[rowIndex][colIndex] = true;
                     break;}
                 case "t":
                     if(occuipedCells[rowIndex][colIndex]!=true){
@@ -82,19 +87,22 @@ public class PuzzleControlle{
                     gridPane.add(groupe.getChildren().get(0),colIndex+2,rowIndex+1);
                     gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex+1+1);
                     System.out.println("form t");
-                    occuipedCells[rowIndex][colIndex] = true;
+                        occuipedCells[rowIndex][colIndex] = true;
                     break;}
                 case "z":
                     if(occuipedCells[rowIndex][colIndex]!=true){
-                    gridPane.add(groupe.getChildren().get(0),colIndex,rowIndex+1);
-                    gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex+1);
-                    gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex+1+1);
-                    gridPane.add(groupe.getChildren().get(0),colIndex+2,rowIndex+1+1);
+                    gridPane.add(groupe.getChildren().get(0),colIndex,rowIndex+1-1);
+                    gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex+1-1);
+                    gridPane.add(groupe.getChildren().get(0),colIndex+1,rowIndex+1+1-1);
+                    gridPane.add(groupe.getChildren().get(0),colIndex+2,rowIndex+1+1-1);
                     System.out.println("form z");
-                    occuipedCells[rowIndex][colIndex] = true;
+                        occuipedCells[rowIndex][colIndex] = true;
                     break;}
+                }
             }
         });
 
     }
+
+
 }

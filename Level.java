@@ -12,7 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.lang.Integer.valueOf;
 
@@ -28,7 +32,7 @@ public class Level {
     protected static int Ymax = size*10;
     private static int[][] MESH = new int[Xmax/size][Ymax/size];
     protected int lvl ;
-    private Button back , reload , next;
+    protected static Button back , reload , next;
 
     Level(int lvl){
         this.lvl = lvl;
@@ -36,9 +40,9 @@ public class Level {
     Level(){}
 
     private HBox buttons = new HBox();
-    private Stage stage;
+    protected static Stage stage;
 
-    protected GridPane gridPane;
+    protected static GridPane gridPane;
 
     protected void startLevel(Stage principalStage , int lvl)  {
         principalStage.close();
@@ -47,38 +51,12 @@ public class Level {
 
 
         gridPane = new GridPane();
-        gridPane.setGridLinesVisible(true);
-        /*for (int i = 0 ; i < 5 ; i++){
-            for(int j = 0 ; j < 5 ; j++){
-                if ((i==0&&j==0)||(i==0&&j==1)||(i==1&&j==1)||(i==1&&j==2)){
-                    Rectangle rct = new Rectangle(24,24);
-                    rct.setFill(Color.WHITE);
-                    rct.setStroke(Color.BLACK);
-                    gridPane.add(rct,j,i);
-                }else {
-                    gridPane.add(new Rectangle(24,24) , j , i);
-                }
-            }
-        }*/
+        Maps.InitialiserMap();
+        gridPane.setTranslateY(80);
+        gridPane.setTranslateX(80);
 
 
-
-
-        for(int i =0 ; i < 10 ; i++){
-            for(int j = 0 ; j < 10 ; j++){
-                Rectangle rct = new Rectangle(24,24);
-                rct.setFill(Color.WHITE);
-                rct.setStroke(Color.BLACK);
-                gridPane.add(rct , i , j);
-            }
-        }
-        gridPane.setTranslateX(100);
-        gridPane.setTranslateY(100);
-
-
-
-
-        PuzzleForm myPuzzle = PuzzleForm.makeRect();
+        PuzzleForm myPuzzle = Maps.initialiseForm();
         Group groupe = PuzzleControlle.makeGroupForm(myPuzzle);
         groupe.setTranslateX(300);
         groupe.setTranslateY(200);
@@ -93,6 +71,7 @@ public class Level {
         buttons.setSpacing(120);
         back.setOnMouseClicked(event -> {backOnClicked();});
         reload.setOnMouseClicked(event -> {reloadOnClicked();});
+        next.setOnMouseClicked(event -> {nextOnClicked();});
         if (!(buttons.getChildren().contains(back))){
             buttons.getChildren().add(back);
         }
@@ -102,7 +81,7 @@ public class Level {
         if (!buttons.getChildren().contains(next)){
             buttons.getChildren().add(next);
         }
-
+        next.setVisible(false);
         root.getChildren().addAll(gridPane,groupe,buttons);
         Scene scene = new Scene(root , 500 , 500);
         stage.setScene(scene);
@@ -115,7 +94,7 @@ public class Level {
         try {
             stage.close();
             new MainApp().start(new Stage());
-        }catch (IOException e){
+        } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("ya une erreur!!");
         }
@@ -125,8 +104,8 @@ public class Level {
         new Level().startLevel(new Stage(),this.lvl);
     }
     protected void nextOnClicked(){
-        //buttons.getChildren().add(next);
-
+        Level.stage.close();
+        new Level().startLevel(new Stage(),this.lvl);
     }
 
 
