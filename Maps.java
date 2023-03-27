@@ -71,7 +71,15 @@ public class Maps {
         }
         return false;
     }
-
+    
+    /*
+    Aina : Si j'ai bien compris, je pense que ta boucle for cause problème. tu as result qui est une forme.
+    Tu lis ton tableau de String et à à chaque fois, tu changes la forme dans result donc il te donne la
+    dernière forme du tableau. Sur la photo, tu as un carré et un z, le dernier c'est z donc il donne que le z.
+    J'ai changé mon code et je pense que ce sera plus facile pour toi. Au lieu de lire un txt, faudra juste lire
+    un tableau d'Integer.
+    */
+    
     protected static PuzzleForm initialiseForm(){
         PuzzleForm result = new PuzzleForm();
         try {
